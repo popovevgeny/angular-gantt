@@ -3,10 +3,13 @@
 	<script type="text/ng-template" id="task-render.html">
 		<div data-ng-init="temp = data.subtasks" data-ng-switch on="data.subtasks.length">
 			<div data-ng-switch-when="0" class="row">
-				<div class="col-xs-4 clearfix">
-					<div class="ag-task-name" title="{{data.name}}">{{data.name}}</div>
-					<div class="pull-left">
-						<i class="fa fa-plus"></i>
+				<div class="col-xs-4">
+					<div class="ag-task-name" title="{{data.name}}">
+						{{data.name}}
+						<span class="ag-controls">
+							<i class="fa fa-plus" title="Добавить"></i>
+							<i class="fa fa-minus" title="Удалить"></i>
+						</span>
 					</div>
 				</div>
 				<div class="col-xs-8">
@@ -30,7 +33,13 @@
 					<div class="col-xs-4">
 						<a class="accordion-toggle clearfix" data-toggle="collapse"
 							 data-parent="#accordion-categories" href="!#{{ 'collapse-category' + data.id }}">
-							<div class="ag-task-name" title="{{data.name}}">{{data.name}}</div>
+							<div class="ag-task-name" title="{{data.name}}">
+								{{data.name}}
+								<span class="ag-controls pull-right">
+									<i class="fa fa-plus" title="Добавить"></i>
+									<i class="fa fa-minus" title="Удалить"></i>
+								</span>
+							</div>
 						</a>
 					</div>
 					<div class="col-xs-8">
@@ -61,8 +70,7 @@
 	<div class="ag-chart-header row">
 		<div class="ag-title col-xs-4">Задачи</div>
 		<div class="ag-time-axis col-xs-8">
-			asdasd
-			<!--<div data-ng-repeat="tick in ticks">{{tick.value}}</div>-->
+			<div class="ag-axis-tick" data-ng-repeat="tick in ticks" data-ng-style="{left: tick.offset}">{{tick.value}}</div>
 		</div>
 	</div>
 	<div class="ag-content">

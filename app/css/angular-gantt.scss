@@ -1,13 +1,25 @@
-$dropHover: green;
-$taskBackground: black;
-$taskHoverBackground: blue;
+$dropHover: #EB540A;
+$taskBackground: #4E9CB5;
+$taskHoverBackground: #327CCB;
+$taskHeight: 25px;
 
 .ag-chart-header {
   margin-top: 25px;
   height: 40px;
+  .ag-title {
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 1.2px;
+    line-height: 40px;
+  }
   .ag-time-axis {
     position: relative;
-    background-color: #000000;
+    .ag-axis-tick {
+      margin-left: 15px;
+      position: absolute;
+      border-left: solid #000000 1px;
+      padding-left: 4px;
+    }
   }
 }
 
@@ -15,15 +27,23 @@ $taskHoverBackground: blue;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.accordion-body {
-  .ag-task-name {
-    padding-left: 5px;
+  font-size: 16px;
+  padding-right: 60px;
+  position: relative;
+  &:hover {
+    .ag-controls {
+      visibility: visible;
+    }
+  }
+  .ag-controls {
+    color: #000000;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    visibility: hidden;
   }
 }
 
-$taskHeight: 25px;
 .ag-task-name, .ag-task-box {
   margin-top: 5px;
   line-height: $taskHeight;

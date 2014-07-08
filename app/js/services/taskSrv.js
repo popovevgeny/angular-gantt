@@ -63,8 +63,8 @@ angular.module('angularGantt').service('taskSrv', ['localStorageService', functi
 					{
 						id: 2,
 						name: 'первая2',
-						start: 1404813085961,
-						end: 1404985984335,
+						start: 14049813085961,
+						end: 1404913185961,
 						subtasks: []
 					},
 					{
