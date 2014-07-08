@@ -1,0 +1,62 @@
+<div>
+
+	<script type="text/ng-template" id="task-render.html">
+		<div data-ng-switch on="data.subtasks.length">
+
+			<div data-ng-switch-when="0" class="row">
+				<div class="col-xs-4">
+					<div class="ag-task-name">{{data.name}}</div>
+				</div>
+				<div class="col-xs-8">
+					<div class="ag-task-box">
+						<div class="ag-task"
+								 data-ng-style="{left: getLeft(data.start), width: getWidth(data.start, data.end)}"
+								 data-drag="true"
+								 jqyoui-draggable="{onStart: 'startCallback(data)', onStop: 'stopCallback(data)'}"
+								 data-jqyoui-options="{helper: 'clone'}">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-ng-switch-default>
+				<div class="row">
+					<div class="col-xs-4">
+						<a class="accordion-toggle clearfix" data-toggle="collapse"
+							 data-parent="#accordion-categories" href="!#{{ 'collapse-category' + data.id }}">
+							<div class="ag-task-name">{{data.name}}</div>
+						</a>
+					</div>
+					<div class="col-xs-8">
+						<div class="ag-task-box">
+							<div class="ag-task"
+									 data-ng-style="{left: getLeft(data.start), width: getWidth(data.start, data.end)}"
+									 data-drag="true"
+									 jqyoui-draggable="{onStart: 'startCallback(data)', onStop: 'stopCallback(data)'}"
+									 data-jqyoui-options="{helper: 'clone'}">
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div id="{{ 'collapse-category' + data.id }}" class="accordion-body collapse in">
+					<div ng-repeat="data in data.subtasks track by data.id" ng-include="'task-render.html'"></div>
+				</div>
+			</div>
+
+		</div>
+	</script>
+
+	<div class="ag-chart-header row">
+		<div class="ag-title col-xs-4">Задачи</div>
+		<div class="ag-time-axis col-xs-8">
+			asdasd
+			<!--<div data-ng-repeat="tick in ticks">{{tick.value}}</div>-->
+		</div>
+	</div>
+	<div class="ag-content">
+		<div data-ng-repeat="data in tasks track by data.id" data-ng-include="'task-render.html'">
+		</div>
+	</div>
+</div>

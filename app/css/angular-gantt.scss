@@ -1,7 +1,37 @@
 .ag-chart-header {
   height: 40px;
+  .ag-time-axis {
+    position: relative;
+    background-color: #000000;
+  }
 }
 
-.ag-title {
+.accordion-body {
+  .ag-task-name {
+    padding-left: 5px;
+  }
+}
 
+$taskHeight: 20px;
+.ag-task-name, .ag-task-box {
+  margin-top: 5px;
+  line-height: $taskHeight;
+}
+
+.ag-content {
+
+}
+
+.ag-task-box {
+  position: initial;
+  overflow: hidden;
+  height: $taskHeight;
+  .ag-task {
+    height: $taskHeight;
+    background-color: #000000;
+    cursor: pointer;
+    &:hover {
+      background-color: cornflowerblue;
+    }
+  }
 }

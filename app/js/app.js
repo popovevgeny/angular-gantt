@@ -3,7 +3,7 @@
  ==================================================================*/
 /*global angular*/
 
-var app = angular.module('angularGantt', ['ngRoute', 'LocalStorageModule']);
+var app = angular.module('angularGantt', ['ngRoute', 'LocalStorageModule', 'ngDragDrop']);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider',
 	function ($routeProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
@@ -18,10 +18,9 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'localStorag
 				redirectTo: '/home'
 			});
 
-		$locationProvider.hashPrefix('!');
-
 		// This is required for Browser Sync to work poperly
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+		localStorageServiceProvider.setPrefix('angular-gantt');
 	}]);
 
 

@@ -21,6 +21,8 @@
 	"expr": true,
 	"sub": true,
 	"globals": {
-		"app": false
+		"angular": false,
+		"d3": false,
+		"$": false
 	}
 }
