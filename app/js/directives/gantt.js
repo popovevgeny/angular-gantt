@@ -8,6 +8,7 @@ angular.module('angularGantt').directive('gantt', ['$window', function ($window)
 		link = function (scope, element) {
 			var startDate, endDate, scale, invScale,
 				dragElement, startX,
+				dragTask, parentList,
 				axis = element.find('.ag-time-axis');
 
 			startDate = new Date();
@@ -25,21 +26,32 @@ angular.module('angularGantt').directive('gantt', ['$window', function ($window)
 				return scale(end) - scale(start);
 			};
 
-			scope.startCallback = function ($event, data) {
-				console.log('start', $event);
+			scope.startCallback = function ($event, $data, task, list) {
+				dragTask = task;
+				parentList = list;
+
 				startX = $event.clientX;
 				dragElement = $($event.currentTarget);
 				dragElement.hide();
 			};
 
 			scope.stopCallback = function ($event, $data, data) {
-				console.log('stop', $event);
 				var addTime = Math.floor(invScale($event.clientX) - invScale(startX));
-				debugger;
 				data.start += addTime;
 				data.end += addTime;
 				scope.$apply();
 				dragElement.show();
+			};
+
+			scope.dropCallback = function ($event, $data, data) {
+				if (data.id === dragTask.id || dragTask.subtasks.indexOf(data) > -1) {
+					return;
+				}
+				data.subtasks.push(dragTask);
+				var index = parentList.indexOf(dragTask);
+				if (index > -1) {
+					parentList.splice(index, 1);
+				}
 			};
 
 			scope.onDrop = function ($event, task) {

@@ -1,9 +1,20 @@
+$dropHover: green;
+$taskBackground: black;
+$taskHoverBackground: blue;
+
 .ag-chart-header {
+  margin-top: 25px;
   height: 40px;
   .ag-time-axis {
     position: relative;
     background-color: #000000;
   }
+}
+
+.ag-task-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .accordion-body {
@@ -12,7 +23,7 @@
   }
 }
 
-$taskHeight: 20px;
+$taskHeight: 25px;
 .ag-task-name, .ag-task-box {
   margin-top: 5px;
   line-height: $taskHeight;
@@ -26,12 +37,16 @@ $taskHeight: 20px;
   position: initial;
   overflow: hidden;
   height: $taskHeight;
+  width: 100%;
+  &-drop {
+    outline: $dropHover dashed 2px;
+  }
   .ag-task {
     height: $taskHeight;
-    background-color: #000000;
+    background-color: $taskBackground;
     cursor: pointer;
     &:hover {
-      background-color: cornflowerblue;
+      background-color: $taskHoverBackground;
     }
   }
 }

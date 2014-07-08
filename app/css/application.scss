@@ -18,8 +18,10 @@
   Then uncomment the two lines below:
 */
 
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/" !default;
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/" !default;
+$icon-font-path: "../../bower_components/font-awesome/fonts" !default;
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "angular-gantt.scss";
 
 
