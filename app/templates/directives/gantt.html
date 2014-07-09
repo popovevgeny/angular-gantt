@@ -1,21 +1,55 @@
 <div>
 
+	<!--TODO валидация-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+						class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Добавить задачу</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="name">Название</label>
+							<input type="text" class="form-control" id="name" placeholder="Введите название" data-ng-model="newTask.name">
+						</div>
+						<div class="form-group">
+							<label for="start">Дата начала</label>
+							<input type="date" class="form-control" id="start" data-ng-model="newTask.start" placeholder="дд.мм.гг">
+						</div>
+						<div class="form-group">
+							<label for="end">Дата окончания</label>
+							<input type="date" class="form-control" id="end" data-ng-model="newTask.end" placeholder="дд.мм.гг">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="setParent($event, data.subtasks)">Отмена
+					</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="add(newTask)">Добавить</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script type="text/ng-template" id="task-render.html">
 		<div data-ng-init="temp = data.subtasks" data-ng-switch on="data.subtasks.length">
 			<div data-ng-switch-when="0" class="row">
 				<div class="col-xs-4">
 					<div class="ag-task-name" title="{{data.name}}">
 						{{data.name}}
-						<span class="ag-controls">
-							<i class="fa fa-plus" title="Добавить"></i>
-							<i class="fa fa-minus" title="Удалить"></i>
-						</span>
+								<span class="ag-controls pull-right">
+									<i class="fa fa-plus" title="Добавить" data-ng-click="setParent($event, data.subtasks)" data-toggle="modal"
+										 data-target="#myModal"></i>
+									<i class="fa fa-minus" title="Удалить" data-ng-click="remove($event, data, parentList)"></i>
+								</span>
 					</div>
 				</div>
 				<div class="col-xs-8">
 					<div class="ag-task-box"
 							 data-drop="true"
-							 ng-model='parentList'
 							 data-jqyoui-options="{tolerance: 'pointer', hoverClass: 'ag-task-box-drop'}"
 							 jqyoui-droppable="{index: {{$index}}, onDrop: 'dropCallback(data)}'}">
 						<div class="ag-task"
@@ -36,8 +70,9 @@
 							<div class="ag-task-name" title="{{data.name}}">
 								{{data.name}}
 								<span class="ag-controls pull-right">
-									<i class="fa fa-plus" title="Добавить"></i>
-									<i class="fa fa-minus" title="Удалить"></i>
+									<i class="fa fa-plus" title="Добавить" data-ng-click="parentTask = data" data-toggle="modal"
+										 data-target="#myModal"></i>
+									<i class="fa fa-minus" title="Удалить" data-ng-click="remove($event, data, parentList)"></i>
 								</span>
 							</div>
 						</a>

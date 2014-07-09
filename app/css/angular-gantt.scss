@@ -2,18 +2,22 @@ $dropHover: #EB540A;
 $taskBackground: #4E9CB5;
 $taskHoverBackground: #327CCB;
 $taskHeight: 25px;
+$headerHeight: 40px;
 
 .ag-chart-header {
   margin-top: 25px;
-  height: 40px;
+  margin-bottom: 10px;
+  height: $headerHeight;
+  border-bottom: solid #000000 1px;
   .ag-title {
     font-size: 18px;
     text-align: center;
     letter-spacing: 1.2px;
-    line-height: 40px;
+    line-height: $headerHeight;
   }
   .ag-time-axis {
     position: relative;
+    line-height: $headerHeight;
     .ag-axis-tick {
       margin-left: 15px;
       position: absolute;

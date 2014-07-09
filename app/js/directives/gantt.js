@@ -81,6 +81,32 @@ angular.module('angularGantt').directive('gantt', ['$window', '$filter', functio
 				task.start = newStart;
 			};
 
+			scope.add = function (newTask) {
+				parentList.push({
+					name: newTask.name,
+					start: new Date(newTask.start).getTime(),
+					end: new Date(newTask.end).getTime(),
+					subtasks: []
+				});
+
+				scope.newTask = {};
+			};
+
+			scope.setParent = function ($event, parent) {
+				parentList = parent;
+
+				$event.preventDefault();
+			};
+
+			scope.remove = function ($event, task, list) {
+				var index = list.indexOf(task);
+				if (index > -1) {
+					list.splice(index, 1);
+				}
+
+				$event.preventDefault();
+			};
+
 			$($window).on('resize', function () {
 				if (!scope.tasks) {
 					return;
