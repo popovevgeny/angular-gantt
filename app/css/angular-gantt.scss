@@ -72,5 +72,12 @@ $headerHeight: 40px;
     &:hover {
       background-color: $taskHoverBackground;
     }
+    .ag-resize-control {
+      position: absolute;
+      height: 100%;
+      width: 5px;
+      cursor: ew-resize;
+      right: 0;
+    }
   }
 }

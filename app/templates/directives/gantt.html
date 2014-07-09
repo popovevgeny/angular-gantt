@@ -13,7 +13,8 @@
 					<form role="form">
 						<div class="form-group">
 							<label for="name">Название</label>
-							<input type="text" class="form-control" id="name" placeholder="Введите название" data-ng-model="newTask.name">
+							<input type="text" class="form-control" id="name" placeholder="Введите название"
+										 data-ng-model="newTask.name">
 						</div>
 						<div class="form-group">
 							<label for="start">Дата начала</label>
@@ -26,9 +27,11 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="setParent($event, data.subtasks)">Отмена
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+									data-ng-click="setParent($event, data.subtasks)">Отмена
 					</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="add(newTask)">Добавить</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="add(newTask)">Добавить
+					</button>
 				</div>
 			</div>
 		</div>
@@ -41,7 +44,8 @@
 					<div class="ag-task-name" title="{{data.name}}">
 						{{data.name}}
 								<span class="ag-controls pull-right">
-									<i class="fa fa-plus" title="Добавить" data-ng-click="setParent($event, data.subtasks)" data-toggle="modal"
+									<i class="fa fa-plus" title="Добавить" data-ng-click="setParent($event, data.subtasks)"
+										 data-toggle="modal"
 										 data-target="#myModal"></i>
 									<i class="fa fa-minus" title="Удалить" data-ng-click="remove($event, data, parentList)"></i>
 								</span>
@@ -51,12 +55,16 @@
 					<div class="ag-task-box"
 							 data-drop="true"
 							 data-jqyoui-options="{tolerance: 'pointer', hoverClass: 'ag-task-box-drop'}"
-							 jqyoui-droppable="{index: {{$index}}, onDrop: 'dropCallback(data)}'}">
+							 jqyoui-droppable="{onDrop: 'dropCallback(data)}'}">
 						<div class="ag-task"
 								 data-ng-style="{left: getLeft(data.start), width: getWidth(data.start, data.end)}"
 								 data-drag="true"
 								 jqyoui-draggable="{onStart: 'startCallback(data, parentList)', onStop: 'stopCallback(data)'}"
 								 data-jqyoui-options="{helper: 'clone'}">
+							<div class="ag-resize-control"
+									 data-drag="true"
+									 jqyoui-draggable="{onStart: 'startResize(data)', onDrag: 'drag(data)', onStop: 'stopResize(data)'}"
+									 data-jqyoui-options="{axis: 'x'}"></div>
 						</div>
 					</div>
 				</div>
@@ -80,13 +88,17 @@
 					<div class="col-xs-8">
 						<div class="ag-task-box"
 								 data-drop="true"
-								 data-jqyoui-options="{tolerance: 'pointer', hoverClass: 'ag-task-box-drop'}"
-								 jqyoui-droppable="{index: {{$index}}, onDrop: 'dropCallback(data)}'}">
+								 data-jqyoui-options="{tolerance: 'pointer', hoverClass: 'ag-task-box-drop', accept: '.ag-task'}"
+								 jqyoui-droppable="{onDrop: 'dropCallback(data)}'}">
 							<div class="ag-task"
 									 data-ng-style="{left: getLeft(data.start), width: getWidth(data.start, data.end)}"
 									 data-drag="true"
-									 jqyoui-draggable="{index: {{$index}}, onStart: 'startCallback(data, parentList)', onStop: 'stopCallback(data)'}"
+									 jqyoui-draggable="{onStart: 'startCallback(data, parentList)', onStop: 'stopCallback(data)'}"
 									 data-jqyoui-options="{helper: 'clone'}">
+								<div class="ag-resize-control"
+										 data-drag="true"
+										 jqyoui-draggable="{onStart: 'startResize(data)', onDrag: 'drag(data)', onStop: 'stopResize(data)'}"
+										 data-jqyoui-options="{axis: 'x'}"></div>
 							</div>
 						</div>
 					</div>

@@ -8,7 +8,7 @@ angular.module('angularGantt').directive('gantt', ['$window', '$filter', functio
 		sevenDays = 7 * 24 * 60 * 60 * 1000,
 		link = function (scope, element) {
 			var startDate, endDate, scale, invScale,
-				dragElement, startX,
+				dragElement, startX, x, resizeTask,
 				dragTask, parentList,
 				axis = element.find('.ag-time-axis'),
 				updateAxis = function () {
@@ -64,7 +64,7 @@ angular.module('angularGantt').directive('gantt', ['$window', '$filter', functio
 			};
 
 			scope.dropCallback = function ($event, $data, data) {
-				if (data.id === dragTask.id || dragTask.subtasks.indexOf(data) > -1) {
+				if (!dragTask || data.id === dragTask.id || dragTask.subtasks.indexOf(data) > -1) {
 					return;
 				}
 				data.subtasks.push(dragTask);
@@ -74,11 +74,19 @@ angular.module('angularGantt').directive('gantt', ['$window', '$filter', functio
 				}
 			};
 
-			scope.onDrop = function ($event, task) {
-				var item = $($event.currentTarget),
-					newStart = invScale($event.originalEvent.clientX - item.offset().left);
-				task.end += +(newStart - task.start);
-				task.start = newStart;
+			scope.startResize = function ($event) {
+				startX = x = $event.clientX;
+				resizeTask = $($event.currentTarget).parent('.ag-task');
+			};
+
+			scope.drag = function ($event) {
+				resizeTask.width(resizeTask.width() + $event.clientX - x);
+				x = $event.clientX;
+			};
+
+			scope.stopResize = function ($event, $data, task) {
+				task.end += Math.floor(invScale($event.clientX) - invScale(startX));
+				scope.$apply();
 			};
 
 			scope.add = function (newTask) {
